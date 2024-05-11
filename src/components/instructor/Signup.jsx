@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const schema = yup.object({
   name: yup.string().required(),
@@ -11,6 +11,7 @@ const schema = yup.object({
 });
 
 const Signup = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -23,10 +24,11 @@ const Signup = () => {
         "http://localhost:3000/api/v1/instructor/signup",
         data,
         {
-          withCredentials: true,
-        },
+          withCredentials: true
+        }
       );
       console.log(res.data);
+      navigate("/instructor/dashboard");
      
     } catch (error) {
       console.log(error);

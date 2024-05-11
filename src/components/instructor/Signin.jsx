@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const schema = yup.object({
   email: yup.string().required().email(),
@@ -10,14 +10,25 @@ const schema = yup.object({
 });
 
 const Signin = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const onSubmit = (data) => {
-    axios.post("http://localhost:3000/api/v1/instructor/signin", data);
+  const onSubmit = async (data) => {
+    try {
+      const res = await axios.post(
+        "http://localhost:3000/api/v1/instructor/signin",
+        data,
+      );
+      console.log(res.data);
+      navigate("/instructor/dashboard");
+     
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

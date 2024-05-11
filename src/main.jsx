@@ -9,6 +9,9 @@ import SignupPage from './pages/user/SignupPage';
 import SigninPage from './pages/user/SigninPage';
 import InstructorSignupPage from './pages/instructor/InstructorSignupPage';
 import InstructorSigninPage from './pages/instructor/InstructorSigninPage';
+import UserDashboardPage from './pages/user/UserDashboardPage';
+import DashboardPage from './pages/instructor/DashboardPage';
+
 
 const router = createBrowserRouter([
   {
@@ -31,6 +34,14 @@ const router = createBrowserRouter([
     path: "/instructor/signin",
     element: <div><InstructorSigninPage/></div>,
   },
+  {
+    path: "/user/dashboard",
+    element: <div><UserDashboardPage/></div>,
+  },
+  {
+    path: "/instructor/dashboard",
+    element: <div><DashboardPage/></div>,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -38,3 +49,4 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <RouterProvider router={router} />
   </React.StrictMode>,
 )
+
